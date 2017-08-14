@@ -1,0 +1,32 @@
+<%= form_with(model: ownership, local: true) do |form| %>
+  <% if ownership.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(ownership.errors.count, "error") %> prohibited this ownership from being saved:</h2>
+
+      <ul>
+      <% ownership.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :owner_id %>
+    <%= form.text_field :owner_id, id: :ownership_owner_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :owned_org_id %>
+    <%= form.text_field :owned_org_id, id: :ownership_owned_org_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :relation %>
+    <%= form.text_field :relation, id: :ownership_relation %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

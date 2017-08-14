@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  owner: one
+  owned_org: one
+  relation: MyString
+
+two:
+  owner: two
+  owned_org: two
+  relation: MyString

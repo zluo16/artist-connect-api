@@ -1,0 +1,2 @@
+module OrganizationConnectionsHelper
+end

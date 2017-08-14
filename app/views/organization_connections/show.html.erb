@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @organization_connection.user %>
+</p>
+
+<p>
+  <strong>Organization:</strong>
+  <%= @organization_connection.organization %>
+</p>
+
+<%= link_to 'Edit', edit_organization_connection_path(@organization_connection) %> |
+<%= link_to 'Back', organization_connections_path %>
