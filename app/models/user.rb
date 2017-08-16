@@ -19,4 +19,8 @@ class User < ApplicationRecord
     connections = UserConnection.all.select{|c| c.connector.id == self.id || c.connection.id == self.id}
     connections.map{|c| c.connector == self ? c.connection : c.connector}
   end
+
+  def friend_num
+    self.friends.length
+  end
 end

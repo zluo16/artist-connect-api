@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :first_name, :last_name, :stage_name, :email, :dob, :friends
+  attributes :id, :first_name, :last_name, :stage_name, :email, :dob, :friends, :friend_num
   has_many :conn_relationships, foreign_key: :connector_id, class_name: 'UserConnection'
   has_many :connections, through: :conn_relationships, source: :connection
 

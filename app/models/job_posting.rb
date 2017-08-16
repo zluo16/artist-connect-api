@@ -7,4 +7,8 @@ class JobPosting < ApplicationRecord
   def ap_number
     aps = Application.all.select{|a| a.job_posting_id == self.id}.length
   end
+
+  def org
+    Organization.find(organization_id)
+  end
 end

@@ -1,5 +1,5 @@
 class JobPostingSerializer < ActiveModel::Serializer
-  attributes :id, :title, :description, :responsibilities, :qualifications, :ap_number
+  attributes :id, :title, :description, :responsibilities, :qualifications, :ap_number, :org
   belongs_to :organization
   has_many :applications
   has_many :users, through: :applications
