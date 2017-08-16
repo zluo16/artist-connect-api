@@ -5,14 +5,14 @@ class Api::V1::UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
-    render json: @users.to_json(include: [:experiences, :educations, :locations, :skills])
+    render json: @users
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
-    render json: @user.to_json(include: [:experiences, :educations, :locations, :skills, :friends])
+    render json: @user
   end
 
   # POST /users
@@ -22,7 +22,7 @@ class Api::V1::UsersController < ApplicationController
 
     if @user.save
       created_jwt = issue_token(id: @user.id)
-      render json: { email: @user.email, jwt: created_jwt }
+      render json: { user: @user, jwt: created_jwt }
     else
       render json: {
         error: 'Email already exists'

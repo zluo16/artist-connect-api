@@ -5,29 +5,23 @@ class Api::V1::JobPostingsController < ApplicationController
   # GET /job_postings.json
   def index
     @job_postings = JobPosting.all
-    render json: @job_postings.to_json(includes: [:applications, :users, :locations])
+    render json: @job_postings
   end
 
-  # GET /job_postings/1
-  # GET /job_postings/1.json
   def show
     @job_posting = JobPosting.find(params[:id])
-    render json: @job_posting.to_json(includes: [:applications, :users, :locations])
+    render json: @job_posting
   end
 
-  # POST /job_postings
-  # POST /job_postings.json
   def create
     @job_posting = JobPosting.new(job_posting_params)
 
-    respond_to do |format|
-      if @job_posting.save
-        format.html { redirect_to @job_posting, notice: 'Job posting was successfully created.' }
-        format.json { render :show, status: :created, location: @job_posting }
-      else
-        format.html { render :new }
-        format.json { render json: @job_posting.errors, status: :unprocessable_entity }
-      end
+    if @job_posting.save
+      redirect_to action: 'show', id: @job_posting.id
+    else
+      render json: {
+        error: "There's a problem!"
+      }, status: 422
     end
   end
 
@@ -50,7 +44,7 @@ class Api::V1::JobPostingsController < ApplicationController
   def destroy
     @job_posting.destroy
     respond_to do |format|
-      format.html { redirect_to job_postings_url, notice: 'Job posting was successfully destroyed.' }
+      # format.html { redirect_to job_postings_url, notice: 'Job posting was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -63,6 +57,6 @@ class Api::V1::JobPostingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_posting_params
-      params.require(:job_posting).permit(:description, :responsibilities, :qualifications)
+      params.permit(:organization_id, :title, :description, :responsibilities, :qualifications)
     end
 end

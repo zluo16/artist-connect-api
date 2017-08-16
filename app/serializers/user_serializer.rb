@@ -1,4 +1,5 @@
-class User < ApplicationRecord
+class UserSerializer < ActiveModel::Serializer
+  attributes :id, :first_name, :last_name, :stage_name, :email, :dob, :friends
   has_many :conn_relationships, foreign_key: :connector_id, class_name: 'UserConnection'
   has_many :connections, through: :conn_relationships, source: :connection
 
@@ -12,11 +13,4 @@ class User < ApplicationRecord
   has_many :experiences
   has_many :educations
   has_many :skills
-
-  has_secure_password
-
-  def friends
-    connections = UserConnection.all.select{|c| c.connector.id == self.id || c.connection.id == self.id}
-    connections.map{|c| c.connector == self ? c.connection : c.connector}
-  end
 end
