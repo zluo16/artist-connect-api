@@ -25,17 +25,13 @@ class Api::V1::JobPostingsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /job_postings/1
-  # PATCH/PUT /job_postings/1.json
   def update
-    respond_to do |format|
-      if @job_posting.update(job_posting_params)
-        format.html { redirect_to @job_posting, notice: 'Job posting was successfully updated.' }
-        format.json { render :show, status: :ok, location: @job_posting }
-      else
-        format.html { render :edit }
-        format.json { render json: @job_posting.errors, status: :unprocessable_entity }
-      end
+    if @job_posting.update(job_posting_params)
+      redirect_to action: 'show', id: @job_posting.id
+    else
+      render json: {
+        error: "There's a problem!"
+      }, status: 422
     end
   end
 

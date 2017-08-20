@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170810150644) do
+ActiveRecord::Schema.define(version: 20170817185644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,16 @@ ActiveRecord::Schema.define(version: 20170810150644) do
     t.datetime "updated_at", null: false
     t.index ["job_posting_id"], name: "index_applications_on_job_posting_id"
     t.index ["user_id"], name: "index_applications_on_user_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.string "text"
+    t.bigint "post_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "educations", force: :cascade do |t|
@@ -102,6 +112,16 @@ ActiveRecord::Schema.define(version: 20170810150644) do
     t.index ["owner_id"], name: "index_ownerships_on_owner_id"
   end
 
+  create_table "posts", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "text"
+    t.integer "likes"
+    t.string "link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
   create_table "skills", force: :cascade do |t|
     t.string "skill"
     t.bigint "user_id"
@@ -141,4 +161,5 @@ ActiveRecord::Schema.define(version: 20170810150644) do
   add_foreign_key "applications", "job_postings"
   add_foreign_key "applications", "users"
   add_foreign_key "experiences", "users"
+  add_foreign_key "posts", "users"
 end

@@ -1,8 +1,6 @@
 class Api::V1::UserConnectionsController < ApplicationController
   before_action :set_user_connection, only: [:show, :edit, :update, :destroy]
 
-  # GET /user_connections
-  # GET /user_connections.json
   def index
     @user_connections = UserConnection.all
     render json: @user_connections.to_json
