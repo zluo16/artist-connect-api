@@ -13,4 +13,8 @@ class Comment < ApplicationRecord
   def cover_letter
     {}
   end
+
+  # def user
+  #   self.user
+  # end
 end

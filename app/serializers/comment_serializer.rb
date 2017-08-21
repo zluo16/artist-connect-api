@@ -1,5 +1,5 @@
 class CommentSerializer < ApplicationSerializer
   attributes :id, :text
   belongs_to :post
-  has_one :user
+  belongs_to :user
 end
