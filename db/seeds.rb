@@ -22,8 +22,11 @@
 # guitar = JobPosting.create(organization: band, title: 'Guitarist')
 # Application.create(user: mike, job_posting: guitar)
 
-JobPosting.all.each do |job|
-  if job.description == nil
-    job.update(description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')
-  end
-end
+# JobPosting.all.each do |job|
+#   if job.description == nil
+#     job.update(description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')
+#   end
+# end
+
+mike = User.create(first_name: 'Mike', last_name: 'Luo', email: 'mike@.mike.mike', dob: DateTime.new(1991,9,2), password: 'test', password_confirmation: 'test')
+vera = User.create(first_name: 'Vera', last_name: 'Zago')

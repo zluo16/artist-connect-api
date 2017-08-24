@@ -18,7 +18,11 @@ class Api::V1::UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
+    year = params[:dob].split('/')[0].to_i
+    month = params[:dob].split('/')[1].to_i
+    day = params[:dob].split('/')[2].to_i
+
+    @user = User.new(first_name: params[:first_name], last_name: params[:last_name], stage_name: params[:stage_name], email: params[:email], dob: DateTime.new(year,day,month), password: params[:password], password_confirmation: params[:password_confirmation])
 
     if @user.save
       created_jwt = issue_token(id: @user.id)

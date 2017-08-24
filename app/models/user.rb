@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_many :experiences
   has_many :educations
   has_many :skills
+  has_many :posts
 
   has_secure_password
 
@@ -22,5 +23,13 @@ class User < ApplicationRecord
 
   def friend_num
     self.friends.length
+  end
+
+  def formatted_dob
+    if self.dob
+      self.dob.strftime('%B, %d %Y')
+    else
+      ''
+    end
   end
 end

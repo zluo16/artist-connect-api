@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       post '/login', to: 'auth#create'
       get '/me', to: 'auth#show'
       get '/posts/:id/comments', to: 'posts#comments'
+      get '/posts/users/:id', to: 'posts#user_posts'
       # get 'comments_controller/index'
       # get 'comments_controller/show'
       # get 'comments_controller/create'

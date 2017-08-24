@@ -23,7 +23,7 @@ class Api::V1::PostsController < ApplicationController
 
   def update
     if @post.update(likes: params[:likes])
-      redirect_to action: 'show', id: @post.id
+      redirect_to action: 'show'
     else
       render json: {
         error: "There's a problem!"
@@ -33,6 +33,11 @@ class Api::V1::PostsController < ApplicationController
 
   def comments
     render json: @post.comments
+  end
+
+  def user_posts
+    @posts = Post.all.select{|post| post.user.id == params[:id].to_i}
+    render json: @posts
   end
 
   # DELETE /posts/1
