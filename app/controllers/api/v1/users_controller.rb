@@ -1,28 +1,23 @@
 class Api::V1::UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
-  # GET /users
-  # GET /users.json
   def index
     @users = User.all
     render json: @users
   end
 
-  # GET /users/1
-  # GET /users/1.json
   def show
     @user = User.find(params[:id])
     render json: @user
   end
 
-  # POST /users
-  # POST /users.json
   def create
     year = params[:dob].split('/')[0].to_i
     month = params[:dob].split('/')[1].to_i
     day = params[:dob].split('/')[2].to_i
+    dob = DateTime.new(year,day,month)
 
-    @user = User.new(first_name: params[:first_name], last_name: params[:last_name], stage_name: params[:stage_name], email: params[:email], dob: DateTime.new(year,day,month), password: params[:password], password_confirmation: params[:password_confirmation])
+    @user = User.new(first_name: params[:first_name], last_name: params[:last_name], stage_name: params[:stage_name], email: params[:email], dob: dob, password: params[:password], password_confirmation: params[:password_confirmation])
 
     if @user.save
       created_jwt = issue_token(id: @user.id)
@@ -34,8 +29,6 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /users/1
-  # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
       if @user.update(user_params)
@@ -48,8 +41,6 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.json
   def destroy
     @user.destroy
     respond_to do |format|
@@ -59,12 +50,11 @@ class Api::V1::UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_user
       @user = User.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.permit(:first_name, :last_name, :stage_name, :email, :dob, :password, :password_confirmation)
     end
